@@ -13,6 +13,19 @@ public class RegisterCollection
 		}
 	}
 	
+	public String getRegisterNameByVarName(String varName)
+	{
+		for(int i = 1; i < this.theRegisters.length; i++)
+		{
+			if(this.theRegisters[i].isInUse() &&
+					this.theRegisters[i].getVarName().equals(varName))
+			{
+				return this.theRegisters[i].getName();
+			}
+		}
+		throw new RuntimeException("Variable Name not found");
+	}
+	
 	public String getNextAvailableRegisterName()
 	{
 		for(int i = 1; i < this.theRegisters.length; i++)
@@ -20,6 +33,7 @@ public class RegisterCollection
 			if(!this.theRegisters[i].isInUse())
 			{
 				this.theRegisters[i].setInUse(true);
+				this.theRegisters[i].setVarName(varName);
 				return this.theRegisters[i].getName();
 			}
 		}
